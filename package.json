@@ -13,7 +13,8 @@
     "react": "^18",
     "react-dom": "^18",
     "react-feather": "^2.0.10",
-    "styled-components": "^6.1.11"
+    "styled-components": "^6.1.11",
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "@types/node": "^20",
