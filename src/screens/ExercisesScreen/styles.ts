@@ -9,11 +9,11 @@ export const PageContainer = styled.div`
 
 export const ContentContainer = styled.div`
   align-content: center;
-  background-color: rgb(212, 212, 212);
+  background-color: #97a3ee;
   border-radius: 10px;
   min-height: 60vh;
   position: relative;
-  border: 2px solid #4c5fd5;
+  border: 1px solid #4c5fd5;
   max-width: 700px;
 `;
 
@@ -31,26 +31,8 @@ export const UList = styled.ul`
   list-style-type: none;
   display: inline-grid;
   row-gap: 10px;
+  grid-auto-rows: min-content;
   overflow: auto;
   height: 200px;
   width: 100%;
-`;
-
-export const ListItem = styled.li`
-  background-color: #4c5fd5;
-  color: white;
-  padding: 5px;
-  border-radius: 5px;
-  width: 150px;
-  place-content: center;
-  height: 40px;
-
-  &:hover {
-    cursor: pointer;
-    background-color: #808ee6;
-  }
-
-  &:active {
-    background-color: #b7c1ff;
-  }
 `;

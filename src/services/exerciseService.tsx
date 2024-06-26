@@ -18,4 +18,9 @@ export const exerciseService = {
       .post(`${BACKENDURL}/exercises`, newExercise, { headers })
       .then((response) => response);
   },
+  async deleteExercise(exerciseId: number) {
+    return await axios
+      .delete(`${BACKENDURL}/exercises/${exerciseId}`)
+      .then((response) => response);
+  },
 };

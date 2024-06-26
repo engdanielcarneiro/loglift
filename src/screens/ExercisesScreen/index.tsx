@@ -1,5 +1,6 @@
 import Button from "@/src/components/Button";
 import Input from "@/src/components/Input";
+import ListItem from "@/src/components/ListItem";
 import { Exercise } from "@/src/interfaces/exercise";
 import { exerciseService } from "@/src/services/exerciseService";
 import Link from "next/link";
@@ -9,7 +10,6 @@ import {
   ContentContainer,
   HeaderContainer,
   ListContainer,
-  ListItem,
   PageContainer,
   UList,
 } from "./styles";
@@ -80,6 +80,27 @@ export default function ExercisesScreen() {
     );
   }
 
+  function handleDeleteExercise(exerciseId: number) {
+    deleteExercise(exerciseId);
+  }
+
+  async function deleteExercise(exerciseId: number) {
+    toast.promise(
+      exerciseService
+        .deleteExercise(exerciseId)
+        .then((response) => {
+          getExercises();
+        })
+        .catch((error) => {
+          throw new Error();
+        }),
+      {
+        pending: "Deleting exercise...",
+        error: "An error ocurred.",
+      }
+    );
+  }
+
   useEffect(() => {
     setFilteredExercises(exercises);
   }, [exercises]);
@@ -87,7 +108,7 @@ export default function ExercisesScreen() {
   useEffect(() => {
     filterExercises();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filterString]);
+  }, [filterString, exercises]);
 
   useEffect(() => {
     getExercises();
@@ -112,7 +133,12 @@ export default function ExercisesScreen() {
         <ListContainer>
           <UList>
             {filteredExercises.map((exercise) => (
-              <ListItem key={exercise.id}>{exercise.name}</ListItem>
+              <ListItem
+                handleDeleteClick={() => handleDeleteExercise(exercise.id)}
+                key={exercise.id}
+              >
+                {exercise.name}
+              </ListItem>
             ))}
           </UList>
         </ListContainer>
