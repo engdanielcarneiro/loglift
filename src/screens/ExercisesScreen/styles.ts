@@ -43,6 +43,7 @@ export const ListItem = styled.li`
   border-radius: 5px;
   width: 150px;
   place-content: center;
+  height: 40px;
 
   &:hover {
     cursor: pointer;

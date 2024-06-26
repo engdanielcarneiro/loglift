@@ -4,6 +4,7 @@ import { Exercise } from "@/src/interfaces/exercise";
 import { exerciseService } from "@/src/services/exerciseService";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 import {
   ContentContainer,
   HeaderContainer,
@@ -21,22 +22,18 @@ export default function ExercisesScreen() {
   const [filterString, setFilterString] = useState("");
   const [newExercise, setNewExercise] = useState("");
 
-  function handleNewExercise() {
+  function handleNewExercise(e: any) {
+    e.preventDefault();
     newExercise !== "" ? addNewExercise() : null;
   }
 
   function addNewExercise() {
-    setExercises([
-      ...exercises,
-      {
-        id: 0,
-        name: newExercise,
-        category: "",
-        description: "",
-      },
-    ]);
-    setNewExercise("");
-    setFilterString("");
+    postAddExercise({
+      id: 0,
+      name: newExercise,
+      category: "",
+      description: "",
+    });
   }
 
   function filterExercises() {
@@ -47,15 +44,40 @@ export default function ExercisesScreen() {
   }
 
   async function getExercises() {
-    await exerciseService
-      .getExercises()
-      .then((response) => {
-        setExercises(response.data);
-      })
-      .catch(() => {
-        setExercises([]);
-        throw new Error();
-      });
+    toast.promise(
+      exerciseService
+        .getExercises()
+        .then((response) => {
+          setExercises(response.data);
+        })
+        .catch(() => {
+          setExercises([]);
+          throw new Error();
+        }),
+      {
+        pending: "Loading exercises...",
+        error: "Something went wrong",
+      }
+    );
+  }
+
+  async function postAddExercise(addExercisePayload: Exercise) {
+    toast.promise(
+      exerciseService
+        .postAddExercise(addExercisePayload)
+        .then((response) => {
+          getExercises();
+          setNewExercise("");
+          setFilterString("");
+        })
+        .catch(() => {
+          throw new Error();
+        }),
+      {
+        pending: "Adding exercise",
+        error: "Something went wrong.",
+      }
+    );
   }
 
   useEffect(() => {
@@ -69,6 +91,7 @@ export default function ExercisesScreen() {
 
   useEffect(() => {
     getExercises();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -94,15 +117,30 @@ export default function ExercisesScreen() {
           </UList>
         </ListContainer>
         <div>
-          <Input
-            placeholder="Add a new exercise"
-            onChange={(e) => setNewExercise(e.target.value)}
-            value={newExercise}
-            marginRight="5px"
-          ></Input>
-          <Button onClick={handleNewExercise}>Add exercise</Button>
+          <form autoComplete="off" onSubmit={handleNewExercise}>
+            <Input
+              placeholder="Add a new exercise"
+              onChange={(e) => setNewExercise(e.target.value)}
+              value={newExercise}
+              marginRight="5px"
+            ></Input>
+            <Button type="submit" onClick={handleNewExercise}>
+              Add exercise
+            </Button>
+          </form>
         </div>
       </ContentContainer>
+      <ToastContainer
+        position="top-right"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        draggable
+        pauseOnHover={false}
+        pauseOnFocusLoss={false}
+      />
     </PageContainer>
   );
 }
