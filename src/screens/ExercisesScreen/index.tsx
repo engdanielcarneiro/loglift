@@ -1,6 +1,7 @@
 import Button from "@/src/components/Button";
 import Input from "@/src/components/Input";
-import { UUID } from "crypto";
+import { Exercise } from "@/src/interfaces/exercise";
+import { exerciseService } from "@/src/services/exerciseService";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import {
@@ -12,33 +13,7 @@ import {
   UList,
 } from "./styles";
 
-interface Exercise {
-  id: string;
-  name: string;
-}
-
-interface Weight {
-  exerciseId: UUID;
-  weight: number;
-  date: Date;
-}
-
-const EXERCISES: Exercise[] = [
-  { id: crypto.randomUUID(), name: "Back Squat" },
-  { id: crypto.randomUUID(), name: "Front Squat" },
-];
-// const WEIGHTS: Weight[] = [
-//   {
-//     exerciseId: randomUUID(),
-//     weight: 140,
-//     date: new Date("25/04/2023"),
-//   },
-//   {
-//     exerciseId: randomUUID(),
-//     weight: 110,
-//     date: new Date("12/06/2023"),
-//   },
-// ];
+const EXERCISES: Exercise[] = [];
 
 export default function ExercisesScreen() {
   const [exercises, setExercises] = useState(EXERCISES);
@@ -53,17 +28,34 @@ export default function ExercisesScreen() {
   function addNewExercise() {
     setExercises([
       ...exercises,
-      { id: crypto.randomUUID(), name: newExercise },
+      {
+        id: 0,
+        name: newExercise,
+        category: "",
+        description: "",
+      },
     ]);
     setNewExercise("");
     setFilterString("");
   }
 
-  function filterExercises(): void {
+  function filterExercises() {
     const filtered = exercises.filter((exercise) =>
       exercise.name.toLowerCase().includes(filterString.toLowerCase())
     );
     setFilteredExercises(filtered);
+  }
+
+  async function getExercises() {
+    await exerciseService
+      .getExercises()
+      .then((response) => {
+        setExercises(response.data);
+      })
+      .catch(() => {
+        setExercises([]);
+        throw new Error();
+      });
   }
 
   useEffect(() => {
@@ -74,6 +66,10 @@ export default function ExercisesScreen() {
     filterExercises();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterString]);
+
+  useEffect(() => {
+    getExercises();
+  }, []);
 
   return (
     <PageContainer>

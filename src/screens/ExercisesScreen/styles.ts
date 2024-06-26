@@ -22,18 +22,18 @@ export const HeaderContainer = styled.div`
   margin-bottom: 20px;
 `;
 export const ListContainer = styled.div`
-  border: 1px solid rgb(141, 141, 141);
-  border-radius: 5px;
   width: 300px;
-  height: 200px;
-  padding: 25px;
-  margin: 15px 0px;
-  overflow: auto;
+  margin: 35px 0px;
 `;
 
 export const UList = styled.ul`
+  justify-content: center;
   list-style-type: none;
   display: inline-grid;
+  row-gap: 10px;
+  overflow: auto;
+  height: 200px;
+  width: 100%;
 `;
 
 export const ListItem = styled.li`
@@ -42,6 +42,7 @@ export const ListItem = styled.li`
   padding: 5px;
   border-radius: 5px;
   width: 150px;
+  place-content: center;
 
   &:hover {
     cursor: pointer;
