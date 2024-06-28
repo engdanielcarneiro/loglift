@@ -1,33 +1,44 @@
-import styled from "styled-components";
+import { HTMLAttributes } from "react";
+import styled, { css } from "styled-components";
+
+interface DivProps extends HTMLAttributes<HTMLDivElement> {
+  marginRight?: string;
+}
 
 export const Container = styled.div`
   display: flex;
-
   align-items: center;
-  background-color: #4c5fd5;
-  color: white;
-  padding: 5px;
+  font-weight: 600;
+  color: #070a20;
+  padding: 5px 10px;
   border-radius: 5px;
-  width: 150px;
   height: 40px;
+  justify-content: space-around;
 
-  //   &:hover {
-  //     cursor: pointer;
-  //     background-color: #808ee6;
-  //   }
+  &:hover {
+    cursor: pointer;
+    background-color: rgb(172, 188, 255, 0.2);
+  }
 
   //   &:active {
   //     background-color: #b7c1ff;
   //   }
 `;
-export const IconContainer = styled.div`
-  position: relative;
-  right: -20px;
+export const IconContainer = styled.div<DivProps>`
   &:hover {
+    cursor: pointer;
     color: red;
   }
+
+  ${({ marginRight }) =>
+    marginRight
+      ? css`
+          margin-right: ${marginRight};
+        `
+      : ""};
 `;
 
 export const StyledListItem = styled.li`
-  width: 100px;
+  width: 100%;
+  text-align: left;
 `;

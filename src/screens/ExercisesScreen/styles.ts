@@ -4,35 +4,63 @@ export const PageContainer = styled.div`
   height: 100vh;
   align-content: center;
   text-align: -webkit-center;
-  padding: 15px;
+  background-color: #ede9f3;
 `;
 
 export const ContentContainer = styled.div`
-  align-content: center;
-  background-color: #97a3ee;
+  width: fit-content;
+  background-color: #fff;
   border-radius: 10px;
-  min-height: 60vh;
   position: relative;
-  border: 1px solid #4c5fd5;
   max-width: 700px;
+  padding: 25px;
+  text-align: left;
 `;
 
 export const HeaderContainer = styled.div`
-  width: 100%;
-  margin-bottom: 20px;
-`;
-export const ListContainer = styled.div`
-  width: 300px;
-  margin: 35px 0px;
+  color: #070a20;
+  font-size: 10px;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  align-items: center;
 `;
 
+export const IconContainer = styled.div`
+  color: #070a20;
+
+  &:hover {
+    color: rgb(172, 188, 255);
+  }
+`;
+
+export const SearchContainer = styled.div`
+  margin: 20px 0px;
+`;
+export const ListContainer = styled.div``;
+
 export const UList = styled.ul`
-  justify-content: center;
   list-style-type: none;
   display: inline-grid;
   row-gap: 10px;
   grid-auto-rows: min-content;
   overflow: auto;
   height: 200px;
+  text-align: center;
+  margin-bottom: 20px;
   width: 100%;
+`;
+
+export const NewExerciseContainer = styled.div`
+  align-items: center;
+  display: flex;
+`;
+
+export const NewExerciseIconContainer = styled.div`
+  color: #070a20;
+
+  &:hover {
+    cursor: pointer;
+    color: rgb(172, 188, 255);
+  }
 `;

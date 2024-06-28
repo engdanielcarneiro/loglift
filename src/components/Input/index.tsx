@@ -6,6 +6,7 @@ interface InputProps extends HTMLAttributes<HTMLInputElement> {
   value: string;
   placeholder: string;
   marginRight?: string;
+  width?: string;
 }
 
 export default function Input({
@@ -13,6 +14,7 @@ export default function Input({
   value,
   placeholder,
   marginRight,
+  width,
 }: InputProps) {
   return (
     <Container
@@ -20,6 +22,7 @@ export default function Input({
       value={value}
       placeholder={placeholder}
       marginRight={marginRight}
+      width={width}
     ></Container>
   );
 }

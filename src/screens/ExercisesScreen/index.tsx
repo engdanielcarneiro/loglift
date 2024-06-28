@@ -1,16 +1,20 @@
-import Button from "@/src/components/Button";
 import Input from "@/src/components/Input";
 import ListItem from "@/src/components/ListItem";
 import { Exercise } from "@/src/interfaces/exercise";
 import { exerciseService } from "@/src/services/exerciseService";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { PlusCircle, XCircle } from "react-feather";
 import { ToastContainer, toast } from "react-toastify";
 import {
   ContentContainer,
   HeaderContainer,
+  IconContainer,
   ListContainer,
+  NewExerciseContainer,
+  NewExerciseIconContainer,
   PageContainer,
+  SearchContainer,
   UList,
 } from "./styles";
 
@@ -117,19 +121,24 @@ export default function ExercisesScreen() {
 
   return (
     <PageContainer>
-      <Link href="/">Home</Link>
       <ContentContainer>
         <HeaderContainer>
           <h1>My exercises</h1>
+          <Link href="/">
+            <IconContainer>
+              <XCircle size={28} />
+            </IconContainer>
+          </Link>
         </HeaderContainer>
-        <div>
+        <SearchContainer>
           <Input
             placeholder="Search exercise"
             onChange={(e) => setFilterString(e.target.value)}
             value={filterString}
             marginRight="5px"
+            width="100%"
           ></Input>
-        </div>
+        </SearchContainer>
         <ListContainer>
           <UList>
             {filteredExercises.map((exercise) => (
@@ -142,19 +151,19 @@ export default function ExercisesScreen() {
             ))}
           </UList>
         </ListContainer>
-        <div>
-          <form autoComplete="off" onSubmit={handleNewExercise}>
+        <form autoComplete="off" onSubmit={handleNewExercise}>
+          <NewExerciseContainer>
             <Input
               placeholder="Add a new exercise"
               onChange={(e) => setNewExercise(e.target.value)}
               value={newExercise}
-              marginRight="5px"
+              marginRight="10px"
             ></Input>
-            <Button type="submit" onClick={handleNewExercise}>
-              Add exercise
-            </Button>
-          </form>
-        </div>
+            <NewExerciseIconContainer>
+              <PlusCircle onClick={handleNewExercise} type="submit" size={30} />
+            </NewExerciseIconContainer>
+          </NewExerciseContainer>
+        </form>
       </ContentContainer>
       <ToastContainer
         position="top-right"

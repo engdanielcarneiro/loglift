@@ -3,23 +3,28 @@ import styled, { css } from "styled-components";
 
 interface InputProps extends HTMLAttributes<HTMLInputElement> {
   marginRight?: string;
+  width?: string;
 }
 
 export const Container = styled.input<InputProps>`
   padding: 10px 10px;
   font-size: 15px;
   border-radius: 5px;
-  border: 1px solid grey;
+  border: 1px solid rgb(201, 201, 201);
   outline: none;
-
-  &:focus {
-    border-color: #4c5fd5;
-  }
+  background-color: rgb(172, 188, 255, 0.2);
 
   ${({ marginRight }) =>
     marginRight
       ? css`
           margin-right: ${marginRight};
+        `
+      : ""};
+
+  ${({ width }) =>
+    width
+      ? css`
+          width: ${width};
         `
       : ""};
 `;

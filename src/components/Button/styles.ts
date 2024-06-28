@@ -1,12 +1,13 @@
 import { ButtonHTMLAttributes } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  width?: string;
+}
 
 export const Container = styled.button<ButtonProps>`
   padding: 0px 10px 0px 10px;
   font-weight: 600;
-  min-width: 100px;
   height: 40px;
   border-radius: 5px;
   border: none;
@@ -22,4 +23,11 @@ export const Container = styled.button<ButtonProps>`
   &:active {
     background-color: #b7c1ff;
   }
+
+  ${({ width }) =>
+    width
+      ? css`
+          width: ${width};
+        `
+      : ""};
 `;
