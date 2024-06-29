@@ -1,10 +1,15 @@
 import styled from "styled-components";
 
+export const LayoutContainer = styled.div`
+  display: flex;
+  align-items: center;
+  place-content: center;
+  background-color: #ede9f3;
+`;
+
 export const PageContainer = styled.div`
   height: 100vh;
-  align-content: center;
-  text-align: -webkit-center;
-  background-color: #ede9f3;
+  place-content: center;
 `;
 
 export const ContentContainer = styled.div`
@@ -24,14 +29,6 @@ export const HeaderContainer = styled.div`
   justify-content: space-between;
   text-align: center;
   align-items: center;
-`;
-
-export const IconContainer = styled.div`
-  color: #070a20;
-
-  &:hover {
-    color: rgb(172, 188, 255);
-  }
 `;
 
 export const SearchContainer = styled.div`

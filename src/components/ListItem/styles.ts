@@ -1,5 +1,5 @@
 import { HTMLAttributes } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 interface DivProps extends HTMLAttributes<HTMLDivElement> {
   marginRight?: string;
@@ -23,19 +23,6 @@ export const Container = styled.div`
   //   &:active {
   //     background-color: #b7c1ff;
   //   }
-`;
-export const IconContainer = styled.div<DivProps>`
-  &:hover {
-    cursor: pointer;
-    color: red;
-  }
-
-  ${({ marginRight }) =>
-    marginRight
-      ? css`
-          margin-right: ${marginRight};
-        `
-      : ""};
 `;
 
 export const StyledListItem = styled.li`

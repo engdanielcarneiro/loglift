@@ -1,4 +1,3 @@
-"use client";
-import ExercisesScreen from "@/src/screens/ExercisesScreen";
-
-export default ExercisesScreen;
+export default function Exercises({}) {
+  return null;
+}

@@ -1,25 +1,25 @@
 import { LiHTMLAttributes } from "react";
-import { Edit, Trash2 } from "react-feather";
-import { Container, IconContainer, StyledListItem } from "./styles";
+import { Trash2 } from "react-feather";
+import IconContainer from "../IconContainer";
+import { Container, StyledListItem } from "./styles";
 
 interface ListItemProps extends LiHTMLAttributes<HTMLLIElement> {
   key: number;
-  handleDeleteClick: () => void;
+  deleteIconOnClick: () => void;
+  onClick: () => void;
 }
 
 export default function ListItem({
   children,
   key,
-  handleDeleteClick,
+  deleteIconOnClick,
+  onClick,
 }: ListItemProps) {
   return (
-    <Container>
+    <Container onClick={onClick}>
       <StyledListItem key={key}>{children}</StyledListItem>
-      <IconContainer marginRight="10px">
-        <Edit onClick={handleDeleteClick} cursor={"pointer"} size={19} />
-      </IconContainer>
-      <IconContainer>
-        <Trash2 onClick={handleDeleteClick} cursor={"pointer"} size={19} />
+      <IconContainer hoverColor="red">
+        <Trash2 onClick={deleteIconOnClick} size={19} />
       </IconContainer>
     </Container>
   );

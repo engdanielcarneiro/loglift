@@ -1,3 +1,5 @@
+"use client";
+import IconContainer from "@/src/components/IconContainer";
 import Input from "@/src/components/Input";
 import ListItem from "@/src/components/ListItem";
 import { Exercise } from "@/src/interfaces/exercise";
@@ -9,10 +11,8 @@ import { ToastContainer, toast } from "react-toastify";
 import {
   ContentContainer,
   HeaderContainer,
-  IconContainer,
   ListContainer,
   NewExerciseContainer,
-  NewExerciseIconContainer,
   PageContainer,
   SearchContainer,
   UList,
@@ -20,7 +20,7 @@ import {
 
 const EXERCISES: Exercise[] = [];
 
-export default function ExercisesScreen() {
+export default function Exercises() {
   const [exercises, setExercises] = useState(EXERCISES);
   const [filteredExercises, setFilteredExercises] = useState(EXERCISES);
   const [filterString, setFilterString] = useState("");
@@ -88,6 +88,10 @@ export default function ExercisesScreen() {
     deleteExercise(exerciseId);
   }
 
+  function handleExerciseClick(exerciseId: number) {
+    console.log(exerciseId);
+  }
+
   async function deleteExercise(exerciseId: number) {
     toast.promise(
       exerciseService
@@ -143,10 +147,11 @@ export default function ExercisesScreen() {
           <UList>
             {filteredExercises.map((exercise) => (
               <ListItem
-                handleDeleteClick={() => handleDeleteExercise(exercise.id)}
+                onClick={() => handleExerciseClick(exercise.id)}
+                deleteIconOnClick={() => handleDeleteExercise(exercise.id)}
                 key={exercise.id}
               >
-                {exercise.name}
+                <Link href={`${exercise.id}`}>{exercise.name}</Link>
               </ListItem>
             ))}
           </UList>
@@ -159,9 +164,9 @@ export default function ExercisesScreen() {
               value={newExercise}
               marginRight="10px"
             ></Input>
-            <NewExerciseIconContainer>
+            <IconContainer>
               <PlusCircle onClick={handleNewExercise} type="submit" size={30} />
-            </NewExerciseIconContainer>
+            </IconContainer>
           </NewExerciseContainer>
         </form>
       </ContentContainer>
