@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { PlusCircle, XCircle } from "react-feather";
 import { ToastContainer, toast } from "react-toastify";
+import MyLink from "../../MyLink/MyLink";
 import {
   ContentContainer,
   HeaderContainer,
@@ -84,7 +85,11 @@ export default function Exercises() {
     );
   }
 
-  function handleDeleteExercise(exerciseId: number) {
+  function handleDeleteExercise(
+    event: React.SyntheticEvent,
+    exerciseId: number
+  ) {
+    event.preventDefault();
     deleteExercise(exerciseId);
   }
 
@@ -146,13 +151,17 @@ export default function Exercises() {
         <ListContainer>
           <UList>
             {filteredExercises.map((exercise) => (
-              <ListItem
-                onClick={() => handleExerciseClick(exercise.id)}
-                deleteIconOnClick={() => handleDeleteExercise(exercise.id)}
-                key={exercise.id}
-              >
-                <Link href={`${exercise.id}`}>{exercise.name}</Link>
-              </ListItem>
+              <MyLink key={exercise.id} href={`/exercises/${exercise.id}`}>
+                <ListItem
+                  onClick={() => handleExerciseClick(exercise.id)}
+                  deleteIconOnClick={(event) =>
+                    handleDeleteExercise(event, exercise.id)
+                  }
+                  key={exercise.id}
+                >
+                  {exercise.name}
+                </ListItem>
+              </MyLink>
             ))}
           </UList>
         </ListContainer>
