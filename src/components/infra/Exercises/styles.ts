@@ -26,7 +26,6 @@ export const HeaderContainer = styled.div`
   color: #070a20;
   font-size: 10px;
   display: flex;
-  justify-content: space-between;
   text-align: center;
   align-items: center;
 `;

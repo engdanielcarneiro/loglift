@@ -1,13 +1,13 @@
 import { HTMLAttributes } from "react";
 import styled, { css } from "styled-components";
 
-interface PProps extends HTMLAttributes<HTMLParagraphElement> {
+interface ContainerProps extends HTMLAttributes<HTMLDivElement> {
   color?: string;
   fontWeight?: string;
   margin?: string;
 }
 
-export const Container = styled.p<PProps>`
+export const Container = styled.div<ContainerProps>`
   ${({ margin }) =>
     margin
       ? css`

@@ -4,12 +4,12 @@ import Input from "@/src/components/Input";
 import ListItem from "@/src/components/ListItem";
 import { Exercise } from "@/src/interfaces/exercise";
 import { exerciseService } from "@/src/services/exerciseService";
-import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { PlusCircle, XCircle } from "react-feather";
+import { ArrowLeftCircle, PlusCircle } from "react-feather";
 import { ToastContainer, toast } from "react-toastify";
 import MyLink from "../../MyLink/MyLink";
+import TextContainer from "../../TextContainer/Text";
 import {
   ContentContainer,
   HeaderContainer,
@@ -42,13 +42,6 @@ export default function Exercises() {
       category: "",
       description: "",
     });
-  }
-
-  function filterExercises() {
-    const filtered = exercises.filter((exercise) =>
-      exercise.name.toLowerCase().includes(filterString.toLowerCase())
-    );
-    setFilteredExercises(filtered);
   }
 
   async function getExercises() {
@@ -109,37 +102,42 @@ export default function Exercises() {
         }),
       {
         pending: "Deleting exercise...",
-        error: "An error ocurred.",
+        error: "An error has ocurred.",
       }
     );
   }
-
-  function handleExerciseClick(exerciseId: number) {}
 
   useEffect(() => {
     setFilteredExercises(exercises);
   }, [exercises]);
 
   useEffect(() => {
+    function filterExercises() {
+      const filtered = exercises.filter((exercise) =>
+        exercise.name.toLowerCase().includes(filterString.toLowerCase())
+      );
+      setFilteredExercises(filtered);
+    }
+
     filterExercises();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterString, exercises]);
 
   useEffect(() => {
     getExercises();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <PageContainer>
       <ContentContainer>
         <HeaderContainer>
-          <h1>My exercises</h1>
-          <Link href="/">
+          <MyLink href="/">
             <IconContainer>
-              <XCircle size={28} />
+              <ArrowLeftCircle size={28} />
             </IconContainer>
-          </Link>
+          </MyLink>
+          <TextContainer margin="0px 0px 0px 15px">
+            <h1>My exercises</h1>
+          </TextContainer>
         </HeaderContainer>
         <SearchContainer>
           <Input
@@ -158,7 +156,6 @@ export default function Exercises() {
                   deleteIconOnClick={(event) =>
                     handleDeleteExercise(event, exercise.id)
                   }
-                  key={exercise.id}
                 >
                   {exercise.name}
                 </ListItem>

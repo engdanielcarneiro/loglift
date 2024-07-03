@@ -4,7 +4,7 @@ import IconContainer from "../IconContainer";
 import { Container, StyledListItem } from "./styles";
 
 interface ListItemProps extends LiHTMLAttributes<HTMLLIElement> {
-  key: number;
+  key?: number;
   deleteIconOnClick: (event: React.SyntheticEvent) => void;
   onClick?: () => void;
 }
