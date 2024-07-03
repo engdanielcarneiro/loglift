@@ -5,6 +5,7 @@ import ListItem from "@/src/components/ListItem";
 import { Exercise } from "@/src/interfaces/exercise";
 import { exerciseService } from "@/src/services/exerciseService";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { PlusCircle, XCircle } from "react-feather";
 import { ToastContainer, toast } from "react-toastify";
@@ -22,10 +23,12 @@ import {
 const EXERCISES: Exercise[] = [];
 
 export default function Exercises() {
+  const router = useRouter();
   const [exercises, setExercises] = useState(EXERCISES);
   const [filteredExercises, setFilteredExercises] = useState(EXERCISES);
   const [filterString, setFilterString] = useState("");
   const [newExercise, setNewExercise] = useState("");
+  const detailsPageId = parseInt(usePathname().replace("/exercises/", ""), 10);
 
   function handleNewExercise(e: any) {
     e.preventDefault();
@@ -61,7 +64,7 @@ export default function Exercises() {
         }),
       {
         pending: "Loading exercises...",
-        error: "Something went wrong",
+        error: "Something went wrong.",
       }
     );
   }
@@ -91,10 +94,7 @@ export default function Exercises() {
   ) {
     event.preventDefault();
     deleteExercise(exerciseId);
-  }
-
-  function handleExerciseClick(exerciseId: number) {
-    console.log(exerciseId);
+    if (exerciseId == detailsPageId) router.push("/exercises");
   }
 
   async function deleteExercise(exerciseId: number) {
@@ -113,6 +113,8 @@ export default function Exercises() {
       }
     );
   }
+
+  function handleExerciseClick(exerciseId: number) {}
 
   useEffect(() => {
     setFilteredExercises(exercises);
@@ -153,7 +155,6 @@ export default function Exercises() {
             {filteredExercises.map((exercise) => (
               <MyLink key={exercise.id} href={`/exercises/${exercise.id}`}>
                 <ListItem
-                  onClick={() => handleExerciseClick(exercise.id)}
                   deleteIconOnClick={(event) =>
                     handleDeleteExercise(event, exercise.id)
                   }

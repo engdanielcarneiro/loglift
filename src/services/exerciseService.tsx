@@ -13,6 +13,11 @@ export const exerciseService = {
       .get(`${BACKENDURL}/exercises`, { headers })
       .then((response) => response);
   },
+  async getExerciseById(exerciseId: number): Promise<any> {
+    return await axios
+      .get(`${BACKENDURL}/exercises/${exerciseId}`, { headers })
+      .then((response) => response);
+  },
   async postAddExercise(newExercise: Exercise) {
     return await axios
       .post(`${BACKENDURL}/exercises`, newExercise, { headers })
