@@ -3,6 +3,8 @@ import styled, { css } from "styled-components";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   width?: string;
+  design?: string;
+  disabled?: boolean;
 }
 
 export const Container = styled.button<ButtonProps>`
@@ -23,6 +25,40 @@ export const Container = styled.button<ButtonProps>`
   &:active {
     background-color: #b7c1ff;
   }
+
+  ${({ design }) =>
+    design == "secundary"
+      ? css`
+          background-color: white;
+          color: black;
+          border: 1px solid black;
+
+          &:hover {
+            cursor: pointer;
+            background-color: #b7c1ff;
+          }
+          &:active {
+            background-color: #808ee6;
+          }
+        `
+      : ""};
+
+  ${({ disabled }) =>
+    disabled
+      ? css`
+          background-color: grey;
+          color: white;
+          border: none;
+          &:hover {
+            cursor: auto;
+            background-color: grey;
+          }
+
+          &:active {
+            background-color: grey;
+          }
+        `
+      : ""};
 
   ${({ width }) =>
     width

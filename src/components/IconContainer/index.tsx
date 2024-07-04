@@ -5,6 +5,7 @@ interface IconContainerProps extends HTMLAttributes<HTMLDivElement> {
   hoverColor?: string;
   color?: string;
   marginRight?: string;
+  display?: string;
 }
 
 export default function IconContainer({
@@ -12,9 +13,15 @@ export default function IconContainer({
   hoverColor,
   children,
   marginRight,
+  display,
 }: IconContainerProps) {
   return (
-    <Container marginRight={marginRight} color={color} hoverColor={hoverColor}>
+    <Container
+      display={display}
+      marginRight={marginRight}
+      color={color}
+      hoverColor={hoverColor}
+    >
       {children}
     </Container>
   );

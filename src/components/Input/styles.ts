@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 
 interface InputProps extends HTMLAttributes<HTMLInputElement> {
   marginRight?: string;
+  marginBottom?: string;
   width?: string;
 }
 
@@ -18,6 +19,13 @@ export const Container = styled.input<InputProps>`
     marginRight
       ? css`
           margin-right: ${marginRight};
+        `
+      : ""};
+
+  ${({ marginBottom }) =>
+    marginBottom
+      ? css`
+          margin-bottom: ${marginBottom};
         `
       : ""};
 

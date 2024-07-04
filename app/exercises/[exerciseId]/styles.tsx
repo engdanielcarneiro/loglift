@@ -1,4 +1,9 @@
-import styled from "styled-components";
+import { HTMLAttributes } from "react";
+import styled, { css } from "styled-components";
+
+interface DivProps extends HTMLAttributes<HTMLDivElement> {
+  display?: string;
+}
 
 export const Container = styled.div`
   width: 370px;
@@ -22,4 +27,20 @@ export const HeaderContainer = styled.div`
   margin-bottom: 30px;
 `;
 
+export const HeaderIconsContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 export const ContentContainer = styled.div``;
+
+export const FooterContainer = styled.div<DivProps>`
+  margin-top: 20px;
+  justify-content: space-between;
+  ${({ display }) =>
+    display
+      ? css`
+          display: ${display};
+        `
+      : ""};
+`;

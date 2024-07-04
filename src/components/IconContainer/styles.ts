@@ -5,6 +5,7 @@ interface IconContainerProps extends HTMLAttributes<HTMLDivElement> {
   hoverColor?: string;
   color?: string;
   marginRight?: string;
+  display?: string;
 }
 
 export const Container = styled.div<IconContainerProps>`
@@ -20,6 +21,12 @@ export const Container = styled.div<IconContainerProps>`
     marginRight
       ? css`
           margin-right: ${marginRight};
+        `
+      : ""};
+  ${({ display }) =>
+    display
+      ? css`
+          display: ${display};
         `
       : ""};
 

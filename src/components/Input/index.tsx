@@ -4,9 +4,11 @@ import { Container } from "./styles";
 interface InputProps extends HTMLAttributes<HTMLInputElement> {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value: string;
-  placeholder: string;
+  placeholder?: string;
   marginRight?: string;
   width?: string;
+  marginBottom?: string;
+  name?: string;
 }
 
 export default function Input({
@@ -15,6 +17,8 @@ export default function Input({
   placeholder,
   marginRight,
   width,
+  marginBottom,
+  name,
 }: InputProps) {
   return (
     <Container
@@ -23,6 +27,8 @@ export default function Input({
       placeholder={placeholder}
       marginRight={marginRight}
       width={width}
+      marginBottom={marginBottom}
+      name={name}
     ></Container>
   );
 }
